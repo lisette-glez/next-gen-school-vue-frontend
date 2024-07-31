@@ -1,33 +1,49 @@
+<script setup lang="ts">
+const { $customFetch } = useNuxtApp()
+import type { RegisterPayload } from '~/types';
+
+const form = ref({
+  name: "",
+  email: "",
+  password: "",
+  password_confirmation: ""
+})
+
+async function register(payload: RegisterPayload) {
+    try{
+      await $customFetch('/register', {
+        method: 'POST',
+        body: payload,
+      }) 
+      return await navigateTo('/')
+    }catch (e){
+      console.log(e);
+    }
+  }
+</script>  
+  
   <template>
-      <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <div class="flex items-center min-h-screen p-6 bg-gray-900">
         <div
-          class="flex-1 h-full max-w-md mx-auto overflow-hidden rounded-lg shadow-xl dark:bg-blue-gray-accent-100"
+          class="flex-1 h-full max-w-md mx-auto overflow-hidden rounded-lg shadow-xl bg-blue-gray-accent-100"
         >         
             <div class="flex items-center justify-center p-6 sm:p-12">
               <div class="w-full">
                 <h1
-                  class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200"
+                  class="mb-4 text-xl font-semibold text-gray-200"
                 >
                   Create account
                 </h1>
-                <div class="mb-1 sm:mb-2">
-                    <span class="text-gray-700 dark:text-gray-400">First name</span>
+                <form @submit.prevent="register(form)">
+                  <div class="mb-1 sm:mb-2">
+                    <span class="text-gray-700 dark:text-gray-400">Full name</span>
                     <input
                       placeholder="John"                   
                       type="text"
                       class="mt-1 flex-grow w-full h-9 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       id="firstName"
                       name="firstName"
-                    />
-                  </div>
-                  <div class="mb-1 sm:mb-2">
-                    <span class="text-gray-700 dark:text-gray-400">Last name</span>
-                    <input
-                      placeholder="Doe"                 
-                      type="text"
-                      class="mt-1 flex-grow w-full h-9 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                      id="lastName"
-                      name="lastName"
+                      v-model="form.name"
                     />
                   </div>
                   <div class="mb-1 sm:mb-2">
@@ -38,6 +54,7 @@
                       class="mt-1 flex-grow w-full h-9 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       id="email"
                       name="email"
+                       v-model="form.email"
                     />
                   </div> 
                   <div class="mb-1 sm:mb-2">
@@ -48,13 +65,25 @@
                       class="mt-1 flex-grow w-full h-9 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       id="password"
                       name="password"
+                      v-model="form.password"
                     />
-                  </div>               
+                  </div>    
+                  <div class="mb-1 sm:mb-2">
+                    <span class="text-gray-700 dark:text-gray-400">Password confirmation</span>
+                    <input
+                      placeholder="***************"
+                      type="password"                                      
+                      class="mt-1 flex-grow w-full h-9 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                      id="password_confirmation"
+                      name="password_confirmation"
+                      v-model="form.password_confirmation"
+                    />
+                  </div>             
                 <div class="flex mt-6 text-sm">
-                  <label class="flex items-center dark:text-gray-400">
+                  <label class="flex items-center text-gray-400">
                     <input
                       type="checkbox"
-                      class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                      class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-gray"
                     />
                     <span class="ml-2">
                       I agree to the
@@ -69,10 +98,11 @@
                     >
                         Create account
                     </button>
-                  </div>            
+                  </div>  
+                </form>
                 <hr class="my-8" />
                 <button
-                  class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-deep-purple-accent-400 focus:border-deep-purple-accent-400 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
+                  class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 border hover:text-white border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-deep-purple-accent-400 focus:border-deep-purple-accent-400 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
                 >
                    <svg  class="w-4 h-4 mr-2"
                       aria-hidden="true"
@@ -82,25 +112,10 @@
                   </svg>                 
                   Google
                 </button>
-                <button
-                  class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-deep-purple-accent-400 focus:border-deep-purple-accent-400 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
-                >
-                  <svg
-                    class="w-4 h-4 mr-2"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"
-                    />
-                  </svg>
-                  Twitter
-                </button>           
                 <p class="mt-4">
                   <a
                     class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                    href="./login.html"
+                    href=""
                   >
                     Already have an account? Login
                   </a>
