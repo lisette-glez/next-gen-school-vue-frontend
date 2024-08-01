@@ -15,7 +15,7 @@ async function register(payload: RegisterPayload) {
         method: 'POST',
         body: payload,
       }) 
-      return await navigateTo('/')
+      return navigateTo('/')
     }catch (e){
       console.log(e);
     }
