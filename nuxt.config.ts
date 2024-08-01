@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   runtimeConfig: {
     public: {
-      appURL: "http://localhost/api",
+      appURL: "http://localhost",
     },
   },
 })

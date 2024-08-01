@@ -1,7 +1,8 @@
 export default defineNuxtPlugin(async () => {
+  const config = useRuntimeConfig();
   const useFetchCookies = async () => {
     await $fetch("/sanctum/csrf-cookie", {
-      baseURL: 'http://localhost',
+      baseURL: config.public.appURL,
       credentials: 'include' // Allow browser to handle cookies
     });
   };
@@ -14,7 +15,7 @@ export default defineNuxtPlugin(async () => {
 	}
   
   const customFetch = $fetch.create({
-      baseURL: 'http://localhost/api', // useRuntimeConfig().public.apiBaseUrl
+      baseURL: `${config.public.appURL}/api`, // useRuntimeConfig().public.apiBaseUrl
       credentials: 'include',
       onRequest({ options }) {
         const defaultHeaders: HeadersInit = {
