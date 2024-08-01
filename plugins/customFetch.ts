@@ -1,23 +1,25 @@
-export default defineNuxtPlugin(async () => {
+export default defineNuxtPlugin(async (nuxtApp) => {
   const config = useRuntimeConfig();
+  const csrf_cookie = "XSRF-TOKEN";
+
   const useFetchCookies = async () => {
-    await $fetch("/sanctum/csrf-cookie", {
+    if(!useCookie(csrf_cookie).value){
+      await $fetch("/sanctum/csrf-cookie", {
       baseURL: config.public.appURL,
-      credentials: 'include' // Allow browser to handle cookies
+      credentials: 'include'
     });
+    }   
   };
-  const csrf_cookie: string = "XSRF-TOKEN";
   let token = useCookie(csrf_cookie)?.value;
-  
-	if (!token) {	
-		await useFetchCookies();   	
-		token = useCookie(csrf_cookie).value;
-	}
-  
+  if (!token) {	
+    await useFetchCookies(); 
+  }
+
   const customFetch = $fetch.create({
-      baseURL: `${config.public.appURL}/api`, // useRuntimeConfig().public.apiBaseUrl
+      baseURL: `${config.public.appURL}/api`,
       credentials: 'include',
-      onRequest({ options }) {
+      onRequest({ options }) {      
+      token = useCookie(csrf_cookie).value;
         const defaultHeaders: HeadersInit = {
           "X-Requested-With": "XMLHttpRequest",
           "Content-Type" : "application/json", 
@@ -25,7 +27,7 @@ export default defineNuxtPlugin(async () => {
           'X-XSRF-TOKEN': token as string,
           ...options?.headers
         };
-        options.headers = defaultHeaders;
+        options.headers = defaultHeaders;  
        },
     })
     return {
