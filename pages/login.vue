@@ -1,23 +1,9 @@
 <script setup lang="ts">
-const { $customFetch } = useNuxtApp()
-import type { LoginPayload } from '~/types';
-
 const form = ref({
   email: "",
   password: "",
 })
-
-async function login (payload: LoginPayload) {
-    try{
-      await $customFetch("/login", {
-        method: "POST",
-        body: payload,
-     });
-      return navigateTo('/')
-    }catch (e){
-      console.log(e);
-    }
-  }
+const { login } = useAuth();
 </script>  
   
   <template>

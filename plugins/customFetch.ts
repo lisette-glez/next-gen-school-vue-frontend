@@ -10,6 +10,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     });
     }   
   };
+  
   let token = useCookie(csrf_cookie)?.value;
   if (!token) {	
     await useFetchCookies(); 

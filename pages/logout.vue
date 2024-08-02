@@ -1,10 +1,6 @@
 <script setup lang="ts">
-const { $customFetch } = useNuxtApp()
-
-await $customFetch("/logout", {
-    method: "POST",
-  });
-  useRouter().replace("/login");
+const { logout } = useAuth();
+logout();
 </script>  
 
 <template>
