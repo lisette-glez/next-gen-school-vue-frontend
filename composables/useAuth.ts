@@ -1,5 +1,6 @@
 import type { LoginPayload, RegisterPayload, User } from "@/types";
 const user = ref<User | null>(null);
+
 export const useAuth = () => {
     const { $customFetch } = useNuxtApp()    
     async function getUser(): Promise<User | null> {

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+definePageMeta({
+    middleware: ["guest"]
+})
 const form = ref({
   email: "",
   password: "",
@@ -38,6 +41,7 @@ const { login } = useAuth();
                       class="mt-1 flex-grow w-full h-9 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       id="password"
                       name="password"
+                      autocomplete="on"
                       v-model="form.password"
                     />
                   </div> 

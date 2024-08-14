@@ -1,10 +1,15 @@
 <script setup lang="ts">
+definePageMeta({
+    middleware: ["guest"]
+})
+
 const form = ref({
   name: "",
   email: "",
   password: "",
   password_confirmation: ""
 })
+
 const { register } = useAuth();
 </script>  
 

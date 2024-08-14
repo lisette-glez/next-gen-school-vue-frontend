@@ -6,4 +6,7 @@ export default defineNuxtConfig({
       appURL: "http://localhost",
     },
   },
+  routeRules: {
+    "/**": { ssr: false },
+  },
 })
