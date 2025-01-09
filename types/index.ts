@@ -21,3 +21,9 @@ export interface User {
   updated_at: Date;
   created_at: Date;
 }
+
+export interface Course {  
+  title: string;
+  description: string;
+  price: number; 
+}
