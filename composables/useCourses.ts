@@ -12,8 +12,19 @@ export const useCourses = () => {
             return null;
         }
     }
+
+    async function getCourseDetails(id: string): Promise<Course | null> {
+        try {
+            const course = await $customFetch<Course>(`/course/${id}`);
+            return course;
+        } catch (err) {
+            console.log("Error fetching course details", err);
+            return null;
+        }
+    }
     
     return {
-        getCourses       
+        getCourses,
+        getCourseDetails       
     };
 }
