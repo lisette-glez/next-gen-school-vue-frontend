@@ -7,10 +7,8 @@ const { user, logout } = useAuth();
             Admin
         </div>
         <nav class="flex-1 px-2 py-4 space-y-1">
-            <NuxtLink to="/courses"><span class="block px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Courses</span></NuxtLink>           
-             <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                Modules
-            </a>          
+            <NuxtLink to="/courses"><span class="block px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Courses</span></NuxtLink>  
+            <NuxtLink to="/modules"><span class="block px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Modules</span></NuxtLink> 
         </nav>
         <div class="px-4 py-2 border-t border-gray-700">
             <div class="flex items-center space-x-2">

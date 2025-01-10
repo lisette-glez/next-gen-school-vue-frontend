@@ -28,3 +28,10 @@ export interface Course {
   description: string;
   price: number; 
 }
+
+export interface Module {  
+  id: number;
+  title: string;
+  description: string;
+  order: number; 
+}
