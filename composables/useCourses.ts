@@ -15,7 +15,8 @@ export const useCourses = () => {
 
     async function getCourseDetails(id: string): Promise<Course | null> {
         try {
-            const course = await $customFetch<Course>(`/course/${id}`);
+            const course = await $customFetch<Course>(`/course/${id}`);  
+            console.log("Course", course)         
             return course;
         } catch (err) {
             console.log("Error fetching course details", err);

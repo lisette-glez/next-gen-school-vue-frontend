@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import type { Course } from '~/types';
+import type { Course, Module } from '~/types';
 
 definePageMeta({
     middleware: ["auth"],
     name: "CourseDetails",
     layout: "admin"
 })
+
 const course = ref<Course | null>(null)
 const { getCourseDetails } = useCourses();
 const route = useRoute()
 onMounted(async () => {
-    course.value = await getCourseDetails(route.params.id as string);
+    course.value = await getCourseDetails(route.params.id as string)    
 });
 </script>
 <template>
@@ -23,5 +24,9 @@ onMounted(async () => {
                 <p class="mt-2 text-gray-900 font-bold">${{ course?.price }}</p>
             </div>
         </div>
+    </div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-6">Modules</h1>
+        <Accordion :items="course?.modules"></Accordion>
     </div>
 </template>
