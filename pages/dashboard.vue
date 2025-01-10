@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Course } from '~/types';
+
 definePageMeta({
     middleware: ["auth"]
 })
@@ -6,17 +8,23 @@ definePageMeta({
 const { user, logout } = useAuth();
 const { getCourses } = useCourses();
 
-const courses = ref([]);
+const courses = ref<Course[] | null>(null);
 const currentPage = ref(1);
 const itemsPerPage = 5;
 
 const paginatedCourses = computed(() => {
+    if (courses.value === null) {
+        return [];
+    }
     const start = (currentPage.value - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    return courses.value.slice(start, end);
+    return courses.value?.slice(start, end) || [];
 });
 
 const totalPages = computed(() => {
+    if (courses.value === null) {
+        return 0;
+    }
     return Math.ceil(courses.value.length / itemsPerPage);
 });
 
