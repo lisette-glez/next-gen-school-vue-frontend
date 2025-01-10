@@ -30,7 +30,7 @@ export const useAuth = () => {
                 body: payload,
             });
             await initUser();
-            useRouter().push("/dashboard");
+            useRouter().push("/");
         } catch (err) {
             console.error('Login failed:', err);
         }        
