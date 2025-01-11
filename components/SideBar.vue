@@ -19,7 +19,7 @@ const { user, logout } = useAuth();
                 </svg>
                 <span class="text-sm">{{ user?.name }}</span>
                 <button @click="logout()"
-                    class="px-1 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 flex items-center space-x-1">
+                    class="px-1 py-1 bg-purple-600 text-white text-sm rounded hover:bg-red-700 flex items-center space-x-1">
                     <span>Logout</span>
                 </button>
             </div>

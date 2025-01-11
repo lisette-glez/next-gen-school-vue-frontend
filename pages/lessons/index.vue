@@ -66,7 +66,7 @@ onMounted(() => {
             </table>
             <div class="mt-4 flex justify-end items-center space-x-2">
                 <button @click="prevPage" :disabled="currentPage === 1"
-                    class="px-1 py-1 bg-blue-gray-accent-100 text-white rounded disabled:opacity-50 flex items-center">
+                    class="px-1 py-1 bg-purple-600 text-white rounded disabled:opacity-50 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -74,7 +74,7 @@ onMounted(() => {
                 </button>
                 <span class="text-gray-700 text-sm">Page {{ currentPage }} of {{ totalPages }}</span>
                 <button @click="nextPage" :disabled="currentPage === totalPages"
-                    class="px-1 py-1 bg-blue-gray-accent-100 text-white rounded disabled:opacity-50 flex items-center">
+                    class="px-1 py-1 bg-purple-600 text-white rounded disabled:opacity-50 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

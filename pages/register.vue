@@ -74,10 +74,11 @@ const { register } = useAuth();
             </svg>
             Google
           </button>
-          <p class="mt-4">
-            <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="">
-              Already have an account? Login
-            </a>
+          <p class="mt-6 text-sm font-medium text-purple-600 dark:text-purple-400">
+            Already have an account?
+            <NuxtLink to="/login"><span
+                class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline">Login</span>
+            </NuxtLink>
           </p>
         </div>
       </div>
