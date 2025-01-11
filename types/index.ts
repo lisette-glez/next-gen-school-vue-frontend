@@ -35,4 +35,5 @@ export interface Module {
   title: string;
   description: string;
   order: number; 
+  course: Course
 }

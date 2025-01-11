@@ -11,7 +11,7 @@ const course = ref<Course | null>(null)
 const { getCourseDetails } = useCourses();
 const route = useRoute()
 onMounted(async () => {
-    course.value = await getCourseDetails(route.params.id as string)    
+    course.value = await getCourseDetails(route.params.id as string)
 });
 </script>
 <template>
@@ -25,8 +25,15 @@ onMounted(async () => {
             </div>
         </div>
     </div>
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-6">Modules</h1>
+    <div class="container mx-auto p-4" v-if="course?.modules?.length ?? 0">
+        <h1 class="text-2xl font-bold my-6">Modules</h1>
         <Accordion :items="course?.modules"></Accordion>
+    </div>
+    <div v-else>
+        <h1 class="text-2xl font-bold my-6">No modules available.</h1>
+        <button
+            class="block px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            Create module
+        </button>
     </div>
 </template>

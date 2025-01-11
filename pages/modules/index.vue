@@ -49,16 +49,16 @@ onMounted(() => {
             <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                 <thead class="border-b-2 border-gray-200">
                     <tr>
+                        <th class="py-3 px-6 text-left text-sm font-semibold">Course</th>
                         <th class="py-3 px-6 text-left text-sm font-semibold">Title</th>
-                        <th class="py-3 px-6 text-left text-sm font-semibold">Description</th>
-                        <th class="py-3 px-6 text-left text-sm font-semibold">Price</th>                       
+                        <th class="py-3 px-6 text-left text-sm font-semibold">Description</th>           
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     <tr class="hover:bg-gray-100 text-sm" v-for="module in paginatedModules" :key="module.id">
+                        <td class="py-4 px-6">{{ module.course.title }}</td>
                         <td class="py-4 px-6">{{ module.title }}</td>
-                        <td class="py-4 px-6">{{ module.description }}</td>
-                        <td class="py-4 px-6">{{ module.order }}</td>                      
+                        <td class="py-4 px-6">{{ module.description }}</td>                                  
                     </tr>
                 </tbody>
             </table>
