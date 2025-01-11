@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Course, Module } from '~/types';
+import type { Course, Module} from '~/types';
 
 definePageMeta({
     middleware: ["auth"],
@@ -8,14 +8,16 @@ definePageMeta({
 })
 
 const course = ref<Course | null>(null)
+const modules = ref<Module[]>([]);
 const { getCourseDetails } = useCourses();
 const route = useRoute()
 onMounted(async () => {
-    course.value = await getCourseDetails(route.params.id as string)
+    course.value = await getCourseDetails(route.params.id as string);
+    modules.value = course.value?.modules ?? [];
 });
 </script>
 <template>
-    <p class="text-2xl font-semibold mb-5 mt-3 text">Course Details</p>
+    <p class="text-2xl font-semibold mb-5 mt-3 text">Course Content</p>
     <div class="min-w-full mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
         <div class="md:flex">
             <div class="p-8">
@@ -25,9 +27,9 @@ onMounted(async () => {
             </div>
         </div>
     </div>
-    <div class="container mx-auto p-4" v-if="course?.modules?.length ?? 0">
+    <div class="container mx-auto p-4" v-if="modules.length">
         <h1 class="text-2xl font-bold my-6">Modules</h1>
-        <Accordion :items="course?.modules"></Accordion>
+        <Accordion :items="modules" :nested="true"></Accordion>       
     </div>
     <div v-else>
         <h1 class="text-2xl font-bold my-6">No modules available.</h1>
@@ -35,5 +37,5 @@ onMounted(async () => {
             class="block px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
             Create module
         </button>
-    </div>
+    </div>    
 </template>

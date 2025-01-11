@@ -44,3 +44,10 @@ export interface Lesson {
   content: number; 
   module: Module  
 }
+
+export interface AccordionItem {
+  title: string;
+  description?: string;
+  content?: string;
+  lessons?: AccordionItem[];
+}
