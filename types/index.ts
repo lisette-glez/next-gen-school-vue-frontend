@@ -33,7 +33,14 @@ export interface Course {
 export interface Module {  
   id: number;
   title: string;
-  description: string;
-  order: number; 
+  description: string; 
   course: Course
+}
+
+export interface Lesson {  
+  id: number;
+  title: string;
+  description: string;
+  content: number; 
+  module: Module  
 }
