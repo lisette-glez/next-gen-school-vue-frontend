@@ -27,7 +27,7 @@ onMounted(async () => {
             </div>
         </div>
     </div>
-    <div class="container mx-auto p-4" v-if="modules.length">
+    <div class="min-w-full mx-auto p-4" v-if="modules.length">
         <h1 class="text-2xl font-bold my-6">Modules</h1>
         <Accordion :items="modules" :nested="true"></Accordion>       
     </div>

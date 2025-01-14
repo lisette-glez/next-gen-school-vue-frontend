@@ -23,8 +23,22 @@ export const useCourses = () => {
         }
     }
     
+    async function createCourse(courseData: { name: string; description: string; modules: number; lessons: number }): Promise<Course | null> {
+        try {          
+            const course = await $customFetch<Course>('/course/generate', {
+                method: 'POST',               
+                body: courseData,
+            });
+            return course;
+        } catch (err) {
+            console.log("Error creating course", err);
+            return null;
+        }
+    }
+    
     return {
         getCourses,
-        getCourseDetails       
+        getCourseDetails,
+        createCourse      
     };
 }

@@ -28,6 +28,8 @@ export interface Course {
   description: string;
   price: number; 
   modules: Module[];
+  content: string;
+  choices: any;  
 }
 
 export interface Module {  
